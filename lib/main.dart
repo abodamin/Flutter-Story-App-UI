@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 import 'customIcons.dart';
 import 'data.dart';
 import 'dart:math';
@@ -30,14 +30,16 @@ class _MyAppState extends State<MyApp> {
 
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
+        gradient: LinearGradient(
+          colors: [
             Color(0xFF1b1e44),
             Color(0xFF2d3447),
           ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              tileMode: TileMode.clamp)),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          // tileMode: TileMode.clamp,
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
@@ -137,13 +139,15 @@ class _MyAppState extends State<MyApp> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Favourite",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 46.0,
-                          fontFamily: "Calibre-Semibold",
-                          letterSpacing: 1.0,
-                        )),
+                    Text(
+                      "Favourite",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 46.0,
+                        fontFamily: "Calibre-Semibold",
+                        letterSpacing: 1.0,
+                      ),
+                    ),
                     IconButton(
                       icon: Icon(
                         CustomIcons.option,
@@ -151,7 +155,7 @@ class _MyAppState extends State<MyApp> {
                         color: Colors.white,
                       ),
                       onPressed: () {},
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -167,9 +171,13 @@ class _MyAppState extends State<MyApp> {
                       child: Center(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 22.0, vertical: 6.0),
-                          child: Text("Latest",
-                              style: TextStyle(color: Colors.white)),
+                            horizontal: 22.0,
+                            vertical: 6.0,
+                          ),
+                          child: Text(
+                            "Latest",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
@@ -177,25 +185,43 @@ class _MyAppState extends State<MyApp> {
                       width: 15.0,
                     ),
                     Text("9+ Stories",
-                        style: TextStyle(color: Colors.blueAccent))
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                        )),
                   ],
                 ),
               ),
               SizedBox(
                 height: 20.0,
               ),
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 18.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Image.asset("assets/image_02.jpg",
-                          width: 296.0, height: 222.0),
-                    ),
-                  )
-                ],
-              )
+              Column(
+                children: List<Widget>.generate(
+                  images.length,
+                  (int index) {
+                    return Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(0.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: Image.asset(
+                              images[index],
+                              height: 150,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    );
+                  },
+                ).toList(),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
             ],
           ),
         ),
@@ -205,9 +231,9 @@ class _MyAppState extends State<MyApp> {
 }
 
 class CardScrollWidget extends StatelessWidget {
-  var currentPage;
-  var padding = 20.0;
-  var verticalInset = 20.0;
+  final currentPage;
+  static const padding = 20.0;
+  static const verticalInset = 20.0;
 
   CardScrollWidget(this.currentPage);
 
@@ -248,12 +274,16 @@ class CardScrollWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: Container(
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
                       color: Colors.black12,
                       offset: Offset(3.0, 6.0),
-                      blurRadius: 10.0)
-                ]),
+                      blurRadius: 10.0,
+                    ),
+                  ],
+                ),
                 child: AspectRatio(
                   aspectRatio: cardAspectRatio,
                   child: Stack(

@@ -46,7 +46,10 @@ flutter:
    - assets/image_02.jpg
    - assets/image_03.jpg
    - assets/image_04.jpg
-
+   - assets/test1.jpg
+   - assets/test2.jpg
+   - assets/test3.jpg
+   - assets/test4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
